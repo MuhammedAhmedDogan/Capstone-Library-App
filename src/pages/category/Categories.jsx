@@ -16,6 +16,7 @@ const Categories = () => {
             try {
                 setIsLoading(true);
                 const categoriesData = await getList(page);
+                categoriesData.sort((a, b) => a.id - b.id);
                 setCategories(categoriesData);
                 setIsLoading(false);
             } catch (error) {
@@ -40,7 +41,7 @@ const Categories = () => {
                         <h2>Description</h2>
                     </div>
                     <h2>Actions</h2>
-                    <button onClick={() => handleEdit(0)}>Add New Category</button>
+                    <button className='add-btn' onClick={() => handleEdit(0)}>Add New Category</button>
                 </div>
                 {categories.map(item => (
                     <div key={item.id} className='category-card'>
@@ -48,7 +49,7 @@ const Categories = () => {
                             <h2>{item.name}</h2>
                             <h2>{item.description}</h2>
                         </div>
-                        <button onClick={() => handleEdit(item.id)}>View / Edit</button>
+                        <button className='view-btn' onClick={() => handleEdit(item.id)}>View / Edit</button>
                     </div>
                 ))}
             </div>}

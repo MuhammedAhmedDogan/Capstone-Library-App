@@ -95,11 +95,12 @@
     h2 {
         font-size: 1rem;
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(0, 0, 0, 1);
         background-color: #F0F0F0;
         margin: 0;
         padding: 7px;
         width: 50%;
+        height: 38px;
         box-sizing: border-box;
         white-space: nowrap;
         overflow: hidden;
@@ -108,38 +109,4 @@
     }
 
     ;
-}
-
-.categories-page button {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    margin-left: 10px;
-    height: 38px;
-    width: 90px;
-    border: 1px solid rgba(0, 0, 0, 0.87);
-    border-radius: 10px;
-    box-sizing: border-box;
-    color: rgba(0, 0, 0, 0.87);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.87);
-    background-color: #F0F0F0;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.categories-page button:hover {
-    border-color: #F37C22;
-    color: #F37C22;
-    box-shadow: 0 0 2px #F37C22;
-}
-
-.categories-page button:active {
-    transform: scale(0.95);
-    border-color: #F37C22;
-    color: #F37C22;
-    box-shadow: 0 0 2px #F37C22;
-}
-
-.categories-page .category-titles button {
-    margin-left: 15px;
-    height: 42px;
 }

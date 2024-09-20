@@ -1,8 +1,10 @@
 import Navbar from '../../components/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getById } from '../../services/api_service';
+import { getById, addData, updateData, deleteData } from '../../services/api_service';
 import './../../css/categoryEditStyle.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const CategoryEdit = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const CategoryEdit = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       if (id === '0') {
-        setCategory({ id: 0, name: '', description: '' })
+        setCategory({ id: 0, name: '', description: '' });
         setIsLoading(false);
       } else {
         try {
@@ -22,7 +24,7 @@ const CategoryEdit = () => {
           setCategory(categoryData);
           setIsLoading(false);
         } catch (error) {
-          navigate(`/${page}`)
+          navigate(`/${page}`);
         }
       }
     };
@@ -39,12 +41,41 @@ const CategoryEdit = () => {
     }));
   };
 
-  const handleSave = () => {
-    console.log(category)
+  const handleSave = async () => {
+    if (category.name.trim() !== '') {
+      try {
+        setIsLoading(true);
+        if (category.id === 0) {
+          await addData(page, category);
+        } else {
+          await updateData(page, id, category);
+        }
+        setIsLoading(false);
+        navigate(`/${page}`);
+      } catch (error) {
+        navigate(`/${page}`);
+      }
+    } else {
+      console.log('name alanı boş olamaz') // alert verilecek
+    }
+
   }
 
-  const handleDelete = () => {
-    console.log(category)
+  const handleDelete = async () => { // onay istenecek
+    try {
+      setIsLoading(true);
+      if (category.id !== 0) {
+        await deleteData(page, id);
+      }
+      setIsLoading(false);
+      navigate(`/${page}`);
+    } catch (error) {
+      navigate(`/${page}`);
+    }
+  }
+
+  const handleTurnBack = () => {
+    navigate(`/${page}`);
   }
 
 
@@ -52,6 +83,8 @@ const CategoryEdit = () => {
     <div className='category-edit-page'>
       <Navbar />
       {isLoading ? <h1 className='loading-screen'>Category Loading...</h1> : <div className='category'>
+        <button onClick={handleTurnBack} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
+
         <h1>Category</h1>
 
         <div className='input-row'>

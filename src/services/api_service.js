@@ -11,7 +11,7 @@ export const getList = async (page) => {
         console.error("Error fetching data:", error);
         throw new Error("Could not fetch data");
     }
-}
+};
 
 export const getById = async (page, id) => {
     try {
@@ -21,4 +21,34 @@ export const getById = async (page, id) => {
         console.error("Error fetching data:", error);
         throw new Error("Could not fetch data");
     }
-}
+};
+
+export const addData = async (page, obj) => {
+    try {
+        const response = await axios.post(`${apiURL}/${page}`, obj);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw new Error("Could not fetch data");
+    }
+};
+
+export const updateData = async (page, id, obj) => {
+    try {
+        const response = await axios.put(`${apiURL}/${page}/${id}`, obj);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw new Error("Could not fetch data");
+    }
+};
+
+export const deleteData = async (page, id) => {
+    try {
+        const response = await axios.delete(`${apiURL}/${page}/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw new Error("Could not fetch data");
+    }
+};
