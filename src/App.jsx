@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
-import './App.css';
 import PageNavigator from './pages/PageNavigator';
+import './App.css';
+
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:page" element={<PageNavigator />} />
+        <Route path="/:page/:id" element={<PageNavigator />} />
       </Routes>
     </Router>
   )

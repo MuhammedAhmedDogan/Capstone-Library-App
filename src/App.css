@@ -7,3 +7,10 @@
   align-items: center;
   text-align: center;
 }
+
+.loading-screen {
+  color: #F37C22;
+  font-size: 3rem;
+  font-weight: 400;
+  margin-top: 300px;
+}

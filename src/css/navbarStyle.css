@@ -30,6 +30,7 @@
     font-weight: 400;
     margin: 0;
     padding: 0;
+    color: #3F1954;
 }
 
 .navbar ul {
@@ -48,6 +49,7 @@
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
+    color: #3F1954;
 }
 
 .navbar ul li:hover {

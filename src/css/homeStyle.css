@@ -36,7 +36,7 @@
     font-size: 1.5rem;
     font-weight: 500;
     color: #3F1954;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .home-page .navigation-icons {
@@ -56,12 +56,12 @@
     border: 3px solid #3F1954;
     box-sizing: border-box;
     border-radius: 30px;
-    transition: all 0.1s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .home-page .navigation-icons .icon-frame:hover {
-    border: 4px solid #F37C22;
+    border: 3px solid #F37C22;
 
     p {
         color: #F37C22;
