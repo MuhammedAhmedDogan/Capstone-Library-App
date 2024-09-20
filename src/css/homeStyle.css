@@ -1,0 +1,77 @@
+.home-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EEDFC0;
+    overflow: hidden;
+}
+
+.home-page-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #3F1954;
+}
+
+.home-page-title img {
+    height: 200px;
+}
+
+.home-page-title h1 {
+    margin: 30px 0 0 0;
+    padding: 0;
+    font-size: 2.7rem;
+    font-weight: 200;
+    color: #3F1954;
+}
+
+.home-page p {
+    margin: 20px 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #3F1954;
+    transition: all 0.2s ease;
+}
+
+.home-page .navigation-icons {
+    margin: 50px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.home-page .navigation-icons .icon-frame {
+    width: 186px;
+    height: 310px;
+    padding: 20px;
+    border: 3px solid #3F1954;
+    box-sizing: border-box;
+    border-radius: 30px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.home-page .navigation-icons .icon-frame:hover {
+    border: 4px solid #F37C22;
+
+    p {
+        color: #F37C22;
+    }
+
+    ;
+
+}
+
+.home-page .navigation-icons img {
+    height: 140px;
+    width: 140px;
+}
