@@ -1,8 +1,11 @@
-import React from 'react'
+import Navbar from './../../components/Navbar';
+import './../../css/bookStyle.css';
 
 const Book = () => {
   return (
-    <div>Book</div>
+    <div className='book-page'>
+      <Navbar />
+    </div>
   )
 }
 

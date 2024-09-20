@@ -1,8 +1,11 @@
-import React from 'react'
+import Navbar from './../../components/Navbar';
+import './../../css/publisherStyle.css';
 
 const Publisher = () => {
   return (
-    <div>Publisher</div>
+    <div className='publisher-page'>
+      <Navbar />
+    </div>
   )
 }
 

@@ -1,8 +1,11 @@
-import React from 'react'
+import Navbar from './../../components/Navbar';
+import './../../css/authorStye.css';
 
 const Author = () => {
   return (
-    <div>Author</div>
+    <div className='author-page'>
+      <Navbar />
+    </div>
   )
 }
 

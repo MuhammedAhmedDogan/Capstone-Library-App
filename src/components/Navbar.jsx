@@ -1,20 +1,17 @@
-import { useNavigate } from 'react-router-dom';
-import './../css/navbarStyle.css';
+import { useNavigate, useParams } from 'react-router-dom';
 import libraryIcon from './../assets/library-icon.jpg';
-import { useState } from 'react';
+import './../css/navbarStyle.css';
 
 function Navbar() {
-    const [currentAddress, setCurrentAddress] = useState('/');
     const navigate = useNavigate();
+    const { page } = useParams();
 
     const handleClick = (e) => {
-        const pageAddress = e.target.id.split('-')[0];
+        const pageAddress = e.currentTarget.id.split('-')[0];
         if (pageAddress === 'home') {
             navigate('/');
-            setCurrentAddress('/');
         } else {
             navigate(`/${pageAddress}`);
-            setCurrentAddress(`/${pageAddress}`);
         }
 
     };
@@ -26,12 +23,12 @@ function Navbar() {
                 <h1>Management System</h1>
             </div>
             <ul>
-                <li id='home-link' onClick={(e) => handleClick(e)} className={currentAddress === '/' ? 'selected' : ''}>Home</li>
-                <li id='books-link' onClick={(e) => handleClick(e)} className={currentAddress === '/books' ? 'selected' : ''}>Books</li>
-                <li id='authors-link' onClick={(e) => handleClick(e)} className={currentAddress === '/authors' ? 'selected' : ''}>Authors</li>
-                <li id='categories-link' onClick={(e) => handleClick(e)} className={currentAddress === '/categories' ? 'selected' : ''}>Categories</li>
-                <li id='publishers-link' onClick={(e) => handleClick(e)} className={currentAddress === '/publishers' ? 'selected' : ''}>Publishers</li>
-                <li id='borrows-link' onClick={(e) => handleClick(e)} className={currentAddress === '/borrows' ? 'selected' : ''}>Borrows</li>
+                <li id='home-link' onClick={(e) => handleClick(e)}>Home</li>
+                <li id='books-link' onClick={(e) => handleClick(e)} className={page === 'books' ? 'selected' : ''}>Books</li>
+                <li id='authors-link' onClick={(e) => handleClick(e)} className={page === 'authors' ? 'selected' : ''}>Authors</li>
+                <li id='categories-link' onClick={(e) => handleClick(e)} className={page === 'categories' ? 'selected' : ''}>Categories</li>
+                <li id='publishers-link' onClick={(e) => handleClick(e)} className={page === 'publishers' ? 'selected' : ''}>Publishers</li>
+                <li id='borrows-link' onClick={(e) => handleClick(e)} className={page === 'borrows' ? 'selected' : ''}>Borrows</li>
             </ul>
         </nav>
     );
