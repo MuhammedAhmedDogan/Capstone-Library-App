@@ -1,8 +1,8 @@
 import { handleDelete } from "./../utils/helpers";
 
-const DeleteConfirmation = ({ itemName, item, setIsLoading, page, id, navigate, setShowConfirm }) => {
+const DeleteConfirmation = ({ itemName, item, setIsLoading, page, id, navigate, setShowConfirm, setShowMessage, setMessageData }) => {
     const handleConfirm = () => {
-        handleDelete(item, setIsLoading, page, id, navigate);
+        handleDelete(itemName, item, setIsLoading, page, id, navigate, setShowMessage, setMessageData);
         setShowConfirm(false);
     }
     return (

@@ -5,6 +5,7 @@ import Publishers from './publisher/Publishers';
 import Borrows from './borrow/Borrows';
 
 import CategoryEdit from './category/CategoryEdit';
+import PublisherEdit from './publisher/PublisherEdit';
 import { useParams } from 'react-router-dom';
 
 const PageNavigator = () => {
@@ -14,7 +15,7 @@ const PageNavigator = () => {
     // if (page === 'authors') return (<AuthorEdit />);
     // if (page === 'books') return (<BookEdit />);
     if (page === 'categories') return (<CategoryEdit />);
-    // if (page === 'publishers') return (<PublisherEdit />);
+    if (page === 'publishers') return (<PublisherEdit />);
     // if (page === 'borrows') return (<BookBorrowingEdit />);
   } else {
     if (page === 'authors') return (<Authors />);

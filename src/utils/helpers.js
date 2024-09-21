@@ -18,36 +18,58 @@ export const handleInput = (e, setItemState) => {
     }));
 };
 
-export const handleSave = async (item, setIsLoading, page, id, navigate) => {
-    if (item.name.trim() !== '') {
-        try {
-            setIsLoading(true);
-            if (item.id === 0) {
-                await addData(page, item);
-            } else {
-                await updateData(page, id, item);
-            }
-            setIsLoading(false);
-            navigate(`/${page}`);
-        } catch (error) {
-            navigate(`/${page}`);
+export const handleSave = async (itemName, item, setIsLoading, page, id, navigate, setShowMessage, setMessageData) => {
+    try {
+        setIsLoading(true);
+        if (item.id === 0) {
+            await addData(page, item);
+            setMessageData({ message: `${itemName} added successfully!`, color: '#32CD32' });
+        } else {
+            await updateData(page, id, item);
+            setMessageData({ message: `${itemName} updated successfully!`, color: '#32CD32' });
         }
-    } else {
-        console.log('name alanı boş olamaz') // alert verilecek
-    }
+        setIsLoading(false);
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+            navigate(`/${page}`);
+        }, 2000);
 
+    } catch (error) {
+        setMessageData({ message: `${itemName} save operation failed!`, color: '#FF2400' });
+        setIsLoading(false);
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+            navigate(`/${page}`);
+        }, 2000);
+    }
 };
 
-export const handleDelete = async (item, setIsLoading, page, id, navigate) => { // onay istenecek
+export const handleDelete = async (itemName, item, setIsLoading, page, id, navigate, setShowMessage, setMessageData) => {
     try {
         setIsLoading(true);
         if (item.id !== 0) {
             await deleteData(page, id);
+            setMessageData({ message: `${itemName} deleted successfully!`, color: '#32CD32' });
+            setIsLoading(false);
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false);
+                navigate(`/${page}`);
+            }, 2000);
+        } else {
+            setIsLoading(false);
+            navigate(`/${page}`);
         }
-        setIsLoading(false);
-        navigate(`/${page}`);
     } catch (error) {
-        navigate(`/${page}`);
+        setMessageData({ message: `${itemName} delete operation failed!`, color: '#FF2400' });
+        setIsLoading(false);
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+            navigate(`/${page}`);
+        }, 2000);
     }
 };
 

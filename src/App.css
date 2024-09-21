@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+p {
+  margin: 16px 0;
+}
+
 .loading-screen {
   color: #F37C22;
   font-size: 3rem;
@@ -35,7 +39,9 @@
 }
 
 .modal {
+  font-family: "Poppins", sans-serif;
   width: 300px;
+  max-width: 300px;
   color: rgba(0, 0, 0, 1);
   background-color: #F0F0F0;
   padding: 20px;
@@ -48,6 +54,7 @@
 button {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
+  font-size: 13px;
   border: 1px solid rgba(0, 0, 0, 0.87);
   border-radius: 10px;
   box-sizing: border-box;
@@ -87,9 +94,14 @@ button {
   box-shadow: 0 0 2px #F37C22;
 }
 
+.save-delete-button-container {
+  margin: 20px 0;
+  display: flex;
+  gap: 100px;
+}
+
 .delete-btn,
 .save-btn {
-  margin: 20px 50px;
   height: 38px;
   width: 90px;
 }
