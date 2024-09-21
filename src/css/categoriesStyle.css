@@ -14,14 +14,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-
-    h1 {
-        color: #F37C22;
-        font-size: 3rem;
-        font-weight: 400;
-    }
-
-    ;
 }
 
 .category-titles {

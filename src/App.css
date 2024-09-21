@@ -15,6 +15,36 @@
   margin-top: 300px;
 }
 
+.page-title {
+  color: #F37C22;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal {
+  width: 300px;
+  color: rgba(0, 0, 0, 1);
+  background-color: #F0F0F0;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.87);
+  margin-bottom: 200px;
+}
+
 button {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
@@ -64,26 +94,30 @@ button {
   width: 90px;
 }
 
-.delete-btn:hover {
+.delete-btn:hover,
+.cancel-btn:hover {
   border-color: #FF2400;
   color: #FF2400;
   box-shadow: 0 0 2px #FF2400;
 }
 
-.save-btn:hover {
+.save-btn:hover,
+.confirm-btn:hover {
   border-color: #32CD32;
   color: #32CD32;
   box-shadow: 0 0 2px #32CD32;
 }
 
-.delete-btn:active {
+.delete-btn:active,
+.cancel-btn:active {
   transform: scale(0.95);
   border-color: #FF2400;
   color: #FF2400;
   box-shadow: 0 0 2px #FF2400;
 }
 
-.save-btn:active {
+.save-btn:active,
+.confirm-btn:active {
   transform: scale(0.95);
   border-color: #32CD32;
   color: #32CD32;
@@ -97,4 +131,17 @@ button {
   left: 25px;
   width: 70px;
   height: 38px;
+}
+
+.modal-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  width: 70px;
+  height: 30px;
 }

@@ -6,7 +6,7 @@
     background-color: #EEDFC0;
     color: #3F1954;
     padding: 0;
-    z-index: 1000;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;

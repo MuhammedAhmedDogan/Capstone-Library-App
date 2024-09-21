@@ -19,7 +19,7 @@ const Categories = () => {
         <div className='categories-page'>
             <Navbar />
             {isLoading ? <h1 className='loading-screen'>Categories Loading...</h1> : <div className='category-list'>
-                <h1>Categories</h1>
+                <h1 className='page-title'>Categories</h1>
                 <div className='category-titles'>
                     <div className='title-informations'>
                         <h2>Name</h2>
