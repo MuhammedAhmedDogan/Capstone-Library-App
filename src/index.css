@@ -20,3 +20,31 @@ body {
   width: 100%;
   min-height: 100vh;
 }
+
+p {
+  margin: 16px 0;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.87);
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.87);
+  background-color: #F0F0F0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

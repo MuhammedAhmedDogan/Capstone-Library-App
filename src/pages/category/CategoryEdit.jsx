@@ -49,6 +49,7 @@ const CategoryEdit = () => {
             <input id='category-name'
               placeholder='Category Name'
               type="text" value={category.name}
+              autoComplete='off'
               onChange={(e) => { handleInput(e, setCategory) }} />
           </div>
         </div>
@@ -59,6 +60,7 @@ const CategoryEdit = () => {
             <textarea id='category-description'
               placeholder='Category Description'
               type="text" value={category.description}
+              autoComplete='off'
               onChange={(e) => { handleInput(e, setCategory) }} />
           </div>
         </div>

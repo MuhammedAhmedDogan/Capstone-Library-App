@@ -8,10 +8,6 @@
   text-align: center;
 }
 
-p {
-  margin: 16px 0;
-}
-
 .loading-screen {
   color: #F37C22;
   font-size: 3rem;
@@ -49,20 +45,6 @@ p {
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.87);
   margin-bottom: 200px;
-}
-
-button {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 13px;
-  border: 1px solid rgba(0, 0, 0, 0.87);
-  border-radius: 10px;
-  box-sizing: border-box;
-  color: rgba(0, 0, 0, 0.87);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.87);
-  background-color: #F0F0F0;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .view-btn {

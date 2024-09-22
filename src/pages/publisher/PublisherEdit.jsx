@@ -54,6 +54,7 @@ const PublisherEdit = () => {
                         <input id='publisher-name'
                             placeholder='Publisher Name'
                             type="text" value={publisher.name}
+                            autoComplete='off'
                             onChange={(e) => { handleInput(e, setPublisher) }} />
                     </div>
                 </div>
@@ -64,6 +65,7 @@ const PublisherEdit = () => {
                         <input id='publisher-establishmentYear'
                             placeholder='Publisher Establishment Year'
                             type="number" value={publisher.establishmentYear}
+                            autoComplete='off'
                             onChange={(e) => { handleInput(e, setPublisher) }} />
                     </div>
                 </div>
@@ -74,6 +76,7 @@ const PublisherEdit = () => {
                         <textarea id='publisher-address'
                             placeholder='Publisher Address'
                             type="text" value={publisher.address}
+                            autoComplete='off'
                             onChange={(e) => { handleInput(e, setPublisher) }} />
                     </div>
                 </div>
