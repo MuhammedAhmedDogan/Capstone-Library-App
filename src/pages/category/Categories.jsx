@@ -21,11 +21,11 @@ const Categories = () => {
             {isLoading ? <h1 className='loading-screen'>Categories Loading...</h1> : <div className='category-list'>
                 <h1 className='page-title'>Categories</h1>
                 <div className='category-titles'>
-                    <div className='title-informations'>
+                    {categories.length !== 0 && <div className='title-informations'>
                         <h2>Name</h2>
                         <h2>Description</h2>
-                    </div>
-                    <h2>Actions</h2>
+                    </div>}
+                    {categories.length !== 0 && <h2>Actions</h2>}
                     <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Category</button>
                 </div>
                 {categories.map(item => (

@@ -21,10 +21,19 @@ const PublisherEdit = () => {
         fetchDataItem(setPublisher, setIsLoading, page, id, navigate);
     }, []);
 
+    useEffect(() => {
+        setPublisher((prevItem) => {
+            if (prevItem.establishmentYear === -12345) {
+              return { ...prevItem, establishmentYear: '' };
+            }
+            return prevItem;
+          });
+    }, [isLoading]);
+
     const handleSaveBtn = () => {
         if (publisher.name.trim() !== '') {
             if (publisher.establishmentYear === '') {
-                const newPublisher = { ...publisher, establishmentYear: 0 };
+                const newPublisher = { ...publisher, establishmentYear: -12345 };
                 handleSave('Publisher', newPublisher, setIsLoading, page, id, navigate, setShowMessage, setMessageData);
             } else {
                 handleSave('Publisher', publisher, setIsLoading, page, id, navigate, setShowMessage, setMessageData);

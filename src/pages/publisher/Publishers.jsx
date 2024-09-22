@@ -15,18 +15,28 @@ const Publishers = () => {
     fetchDataList(setPublishers, setIsLoading, page, navigate);
   }, []);
 
+  useEffect(() => {
+    const editedItems = publishers.map(item => {
+      if (item.establishmentYear === -12345) {
+        return { ...item, establishmentYear: '' };
+      }
+      return item;
+    });
+    setPublishers(editedItems);
+  }, [isLoading]);
+
   return (
     <div className='publishers-page'>
       <Navbar />
       {isLoading ? <h1 className='loading-screen'>Publishers Loading...</h1> : <div className='publisher-list'>
         <h1 className='page-title'>Publishers</h1>
         <div className='publisher-titles'>
-          <div className='title-informations'>
+          {publishers.length !== 0 && <div className='title-informations'>
             <h2>Name</h2>
             <h2>Establishment Year</h2>
             <h2>Address</h2>
-          </div>
-          <h2>Actions</h2>
+          </div>}
+          {publishers.length !== 0 && <h2>Actions</h2>}
           <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Publisher</button>
         </div>
         {publishers.map(item => (
@@ -44,4 +54,4 @@ const Publishers = () => {
   )
 }
 
-export default Publishers
+export default Publishers;

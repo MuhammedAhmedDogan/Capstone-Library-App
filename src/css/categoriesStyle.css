@@ -27,7 +27,7 @@
     position: sticky;
     top: 90px;
     background-color: #F9F6EE;
-    z-index: 100;
+    z-index: 9;
 
     .title-informations {
         display: flex;
