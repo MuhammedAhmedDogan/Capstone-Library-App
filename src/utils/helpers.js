@@ -94,9 +94,6 @@ export const fetchDataList = async (setListState, setIsLoading, page, navigate) 
         setListState(ListData);
         setIsLoading(false);
     } catch (error) {
-        console.error("Error processing data:", error);
-        setTimeout(() => {
-            navigate(page)
-        }, 3000);
+        navigate('/');
     }
 };

@@ -15,6 +15,18 @@ const Authors = () => {
     fetchDataList(setAuthors, setIsLoading, page, navigate);
   }, []);
 
+  useEffect(() => {
+    const editedItems = authors.map(item => {
+      if (item.birthDate === '0001-01-01') {
+        return { ...item, birthDate: '' };
+      }
+      const date = new Date(item.birthDate);
+      const formattedDate = date.toLocaleDateString();
+      return { ...item, birthDate: formattedDate };
+    });
+    setAuthors(editedItems);
+  }, [isLoading]);
+
   return (
     <div className='authors-page'>
       <Navbar />
