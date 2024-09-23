@@ -6,7 +6,7 @@ import { handleTurnBack, handleInput, handleSave, fetchDataItem } from './../../
 import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
-import './../../css/categoryEditStyle.css';
+import './../../css/editPageStyles.css';
 
 const CategoryEdit = () => {
   const navigate = useNavigate();
@@ -34,13 +34,12 @@ const CategoryEdit = () => {
   };
 
   return (
-    <div className='category-edit-page'>
+    <div className='item-edit-page'>
       <Navbar />
+      <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
       {showMessage && <ToastMessage messageData={messageData} />}
       {showConfirm && <DeleteConfirmation itemName='Category' item={category} setIsLoading={setIsLoading} page={page} id={id} navigate={navigate} setShowConfirm={setShowConfirm} setShowMessage={setShowMessage} setMessageData={setMessageData} />}
-      {isLoading ? <h1 className='loading-screen'>Category Loading...</h1> : <div className='category'>
-        <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
-
+      {isLoading ? <h1 className='loading-screen'>Category Loading...</h1> : <div className='item'>
         <h1 className='page-title'>Category</h1>
 
         <div className='input-row'>

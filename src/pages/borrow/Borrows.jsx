@@ -1,9 +1,9 @@
 import Navbar from '../../components/Navbar';
-import './../../css/borrowsStyle.css';
+import './../../css/listPageStyles.css';
 
 const Borrows = () => {
   return (
-    <div className='borrows-page'>
+    <div className='list-page'>
       <Navbar />
     </div>
   )

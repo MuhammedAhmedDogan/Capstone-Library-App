@@ -6,7 +6,7 @@ import { handleTurnBack, handleInput, handleSave, fetchDataItem } from './../../
 import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
-import './../../css/authorEditStyle.css';
+import './../../css/editPageStyles.css';
 
 const AuthorEdit = () => {
     const navigate = useNavigate();
@@ -48,13 +48,12 @@ const AuthorEdit = () => {
     };
 
     return (
-        <div className='author-edit-page'>
+        <div className='item-edit-page'>
             <Navbar />
+            <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
             {showMessage && <ToastMessage messageData={messageData} />}
             {showConfirm && <DeleteConfirmation itemName='Author' item={author} setIsLoading={setIsLoading} page={page} id={id} navigate={navigate} setShowConfirm={setShowConfirm} setShowMessage={setShowMessage} setMessageData={setMessageData} />}
-            {isLoading ? <h1 className='loading-screen'>Author Loading...</h1> : <div className='author'>
-                <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
-
+            {isLoading ? <h1 className='loading-screen'>Author Loading...</h1> : <div className='item'>
                 <h1 className='page-title'>Author</h1>
 
                 <div className='input-row'>

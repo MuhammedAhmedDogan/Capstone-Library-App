@@ -7,7 +7,7 @@ import { handleTurnBack, handleInput, handleSave, fetchDataItem, fetchDataList }
 import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
-import './../../css/bookEditStyle.css';
+import './../../css/editPageStyles.css';
 
 const BookEdit = () => {
   const navigate = useNavigate();
@@ -55,13 +55,12 @@ const BookEdit = () => {
   };
 
   return (
-    <div className='book-edit-page'>
+    <div className='item-edit-page'>
       <Navbar />
+      <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
       {showMessage && <ToastMessage messageData={messageData} />}
       {showConfirm && <DeleteConfirmation itemName='Book' item={book} setIsLoading={setIsLoading} page={page} id={id} navigate={navigate} setShowConfirm={setShowConfirm} setShowMessage={setShowMessage} setMessageData={setMessageData} />}
-      {isLoading ? <h1 className='loading-screen'>Book Loading...</h1> : <div className='book'>
-        <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
-
+      {isLoading ? <h1 className='loading-screen'>Book Loading...</h1> : <div className='item'>
         <h1 className='page-title'>Book</h1>
 
         <div className='input-row'>

@@ -3,7 +3,7 @@ import { StateContext } from './../../context/StateContext';
 import { fetchDataList, goToEditPage } from './../../utils/helpers';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import './../../css/booksStyle.css';
+import './../../css/listPageStyles.css';
 
 const Books = () => {
   const navigate = useNavigate();
@@ -26,12 +26,12 @@ const Books = () => {
   }, [isLoading]);
 
   return (
-    <div className='books-page'>
+    <div className='list-page'>
       <Navbar />
-      {isLoading ? <h1 className='loading-screen'>Books Loading...</h1> : <div className='book-list'>
+      {isLoading ? <h1 className='loading-screen'>Books Loading...</h1> : <div className='list-container'>
         <h1 className='page-title'>Books</h1>
-        <div className='book-titles'>
-          {books.length !== 0 && <div className='title-informations'>
+        <div className='list-titles'>
+          {books.length !== 0 && <div className='book-title-informations'>
             <h2>Name</h2>
             <h2>Publication Year</h2>
 
@@ -43,7 +43,7 @@ const Books = () => {
           <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Book</button>
         </div>
         {books.map(item => (
-          <div key={item.id} className='book-card'>
+          <div key={item.id} className='item-card'>
             <div className='book-informations'>
               <h2>{item.name}</h2>
               <h2>{item.publicationYear}</h2>
