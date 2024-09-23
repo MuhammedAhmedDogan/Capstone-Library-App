@@ -38,7 +38,6 @@ const Authors = () => {
             <h2>Birth Date</h2>
             <h2>Country</h2>
           </div>}
-          {authors.length !== 0 && <h2>Actions</h2>}
           <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Author</button>
         </div>
         {authors.map(item => (

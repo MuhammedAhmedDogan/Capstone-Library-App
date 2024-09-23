@@ -36,7 +36,6 @@ const Publishers = () => {
             <h2>Establishment Year</h2>
             <h2>Address</h2>
           </div>}
-          {publishers.length !== 0 && <h2>Actions</h2>}
           <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Publisher</button>
         </div>
         {publishers.map(item => (

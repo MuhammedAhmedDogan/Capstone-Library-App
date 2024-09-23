@@ -25,7 +25,6 @@ const Categories = () => {
                         <h2>Name</h2>
                         <h2>Description</h2>
                     </div>}
-                    {categories.length !== 0 && <h2>Actions</h2>}
                     <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Category</button>
                 </div>
                 {categories.map(item => (

@@ -82,6 +82,7 @@ export const fetchDataItem = async (setItemState, setIsLoading, page, id, naviga
             setItemState(item);
             setIsLoading(false);
         } catch (error) {
+            console.log(error);
             navigate(`/${page}`);
         }
     }
@@ -94,6 +95,7 @@ export const fetchDataList = async (setListState, setIsLoading, page, navigate) 
         setListState(ListData);
         setIsLoading(false);
     } catch (error) {
+        console.log(error);
         navigate('/');
     }
 };

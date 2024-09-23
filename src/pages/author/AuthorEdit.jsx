@@ -28,7 +28,7 @@ const AuthorEdit = () => {
             }
             return prevItem;
           });
-    }, [isLoading]);
+    }, [author.birthDate]);
 
     const handleSaveBtn = () => {
         if (author.name.trim() !== '') {

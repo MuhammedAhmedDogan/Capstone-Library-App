@@ -28,7 +28,7 @@ const PublisherEdit = () => {
             }
             return prevItem;
           });
-    }, [isLoading]);
+    }, [publisher.establishmentYear]);
 
     const handleSaveBtn = () => {
         if (publisher.name.trim() !== '') {

@@ -35,28 +35,19 @@
         justify-content: start;
         align-items: center;
         text-align: start;
-        width: 75%;
+        width: 85%;
 
         h2 {
             font-size: 1.4rem;
             font-weight: 400;
             color: rgba(0, 0, 0, 0.87);
             margin: 0;
-            padding: 0 7px;
+            padding: 0;
             width: calc(100% / 3);
             box-sizing: border-box;
         }
 
         ;
-    }
-
-    ;
-
-    h2 {
-        font-size: 1.4rem;
-        font-weight: 400;
-        color: rgba(0, 0, 0, 0.87);
-        margin: 0 16px;
     }
 
     ;
@@ -78,10 +69,11 @@
         justify-content: start;
         align-items: center;
         text-align: start;
-        width: 75%;
+        width: 85%;
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid rgba(0, 0, 0, 0.87);
+        box-sizing: border-box;
         transition: all 0.3s ease;
     }
 
