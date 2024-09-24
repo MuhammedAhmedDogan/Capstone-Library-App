@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import libraryIcon from './../assets/library-icon.jpg';
-import './../css/navbarStyle.css';
+import './../css/navbarStyles.css';
 
 function Navbar() {
     const navigate = useNavigate();

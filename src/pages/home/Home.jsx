@@ -5,7 +5,7 @@ import authorsIcon from './../../assets/authors-icon.png';
 import categoriesIcon from './../../assets/categories-icon.png';
 import borrowsIcon from './../../assets/borrows-icon.png';
 import { useNavigate } from 'react-router-dom';
-import './../../css/homeStyle.css';
+import './../../css/homePageStyles.css';
 
 const Home = () => {
   const navigate = useNavigate();
