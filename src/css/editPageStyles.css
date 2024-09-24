@@ -92,5 +92,12 @@
         ;
     }
 
+    .category-input-area {
+        width: 80%;
+        display: flex;
+        justify-content: start;
+        margin-left: 50px;
+    }
+
     ;
 }

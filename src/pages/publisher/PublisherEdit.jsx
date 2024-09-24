@@ -19,7 +19,7 @@ const PublisherEdit = () => {
 
     useEffect(() => {
         fetchDataItem(setPublisher, setIsLoading, page, id, navigate);
-    }, []);
+    }, [page, id]);
 
     useEffect(() => {
         setPublisher((prevItem) => {

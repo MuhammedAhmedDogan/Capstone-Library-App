@@ -85,6 +85,7 @@ export const handleDelete = async (itemName, item, setIsLoading, page, id, navig
 };
 
 export const fetchDataItem = async (setItemState, setIsLoading, page, id, navigate) => {
+    setIsLoading(true);
     if (id === '0') {
         setIsLoading(false);
     } else {
@@ -100,6 +101,7 @@ export const fetchDataItem = async (setItemState, setIsLoading, page, id, naviga
 };
 
 export const fetchDataList = async (setListState, setIsLoading, page, navigate) => {
+    setIsLoading(true);
     try {
         const ListData = await getList(page);
         ListData.sort((a, b) => a.id - b.id);

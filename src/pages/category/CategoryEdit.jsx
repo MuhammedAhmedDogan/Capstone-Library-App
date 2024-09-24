@@ -19,7 +19,7 @@ const CategoryEdit = () => {
 
   useEffect(() => {
     fetchDataItem(setCategory, setIsLoading, page, id, navigate);
-  }, []);
+  }, [page, id]);
 
   const handleSaveBtn = () => {
     if (category.name.trim() !== '') {

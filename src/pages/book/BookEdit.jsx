@@ -8,24 +8,32 @@ import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
 import './../../css/editPageStyles.css';
-import CheckboxesTags from '../../components/CheckboxesTags';
+import CategorySelector from '../../components/CategorySelector';
 
 const BookEdit = () => {
   const navigate = useNavigate();
   const { page, id } = useParams();
   const { authors, setAuthors, publishers, setPublishers, categories, setCategories } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAllLoading, setIsAllLoading] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [messageData, setMessageData] = useState({ message: '', color: 'black' });
   const [book, setBook] = useState({ id: 0, name: '', publicationYear: '', stock: '', author: { id: 0 }, publisher: { id: 0 }, categories: [] });
 
   useEffect(() => {
-    fetchDataItem(setBook, setIsLoading, page, id, navigate);
-    fetchDataList(setAuthors, setIsLoading, 'authors', navigate);
-    fetchDataList(setPublishers, setIsLoading, 'publishers', navigate);
-    fetchDataList(setCategories, setIsLoading, 'categories', navigate);
-  }, []);
+    const fetchAll = async () => {
+      setIsAllLoading(true);
+      await Promise.all([
+        fetchDataItem(setBook, setIsLoading, page, id, navigate),
+        fetchDataList(setAuthors, setIsLoading, 'authors', navigate),
+        fetchDataList(setPublishers, setIsLoading, 'publishers', navigate),
+        fetchDataList(setCategories, setIsLoading, 'categories', navigate),
+      ]);
+      setIsAllLoading(false);
+    }
+    fetchAll();
+  }, [page, id]);
 
   useEffect(() => {
     setBook((prevItem) => {
@@ -77,7 +85,7 @@ const BookEdit = () => {
       <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
       {showMessage && <ToastMessage messageData={messageData} />}
       {showConfirm && <DeleteConfirmation itemName='Book' item={book} setIsLoading={setIsLoading} page={page} id={id} navigate={navigate} setShowConfirm={setShowConfirm} setShowMessage={setShowMessage} setMessageData={setMessageData} />}
-      {isLoading ? <h1 className='loading-screen'>Book Loading...</h1> : <div className='item'>
+      {isLoading && isAllLoading ? <h1 className='loading-screen'>Book Loading...</h1> : <div className='item'>
         <h1 className='page-title'>Book</h1>
 
         <div className='input-row'>
@@ -132,8 +140,8 @@ const BookEdit = () => {
 
         <div className='input-row'>
           <h2>Categories:</h2>
-          <div className='input-area'>
-            <CheckboxesTags categories={categories} />
+          <div className='category-input-area'>
+            <CategorySelector categories={categories} book={book} setBook={setBook} />
           </div>
         </div>
 

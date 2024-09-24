@@ -34,7 +34,6 @@ const Books = () => {
           {books.length !== 0 && <div className='book-title-informations'>
             <h2>Name</h2>
             <h2>Publication Year</h2>
-
             <h2>Author</h2>
             <h2>Publisher</h2>
             <h2>Categories</h2>
@@ -47,7 +46,6 @@ const Books = () => {
             <div className='book-informations'>
               <h2>{item.name}</h2>
               <h2>{item.publicationYear}</h2>
-
               <h2>{item.author.name}</h2>
               <h2>{item.publisher.name}</h2>
               <h2>{item.categories.map((category, index) => (

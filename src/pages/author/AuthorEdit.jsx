@@ -19,7 +19,7 @@ const AuthorEdit = () => {
 
     useEffect(() => {
         fetchDataItem(setAuthor, setIsLoading, page, id, navigate);
-    }, []);
+    }, [page, id]);
 
     useEffect(() => {
         setAuthor((prevItem) => {
