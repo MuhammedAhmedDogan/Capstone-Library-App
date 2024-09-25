@@ -8,9 +8,10 @@ export const StateProvider = ({ children }) => {
     const [publishers, setPublishers] = useState([]);
     const [authors, setAuthors] = useState([]);
     const [books, setBooks] = useState([]);
+    const [borrows, setBorrows] = useState([]);
 
     return (
-        <StateContext.Provider value={{ categories, setCategories, publishers, setPublishers, authors, setAuthors, books, setBooks }}>
+        <StateContext.Provider value={{ categories, setCategories, publishers, setPublishers, authors, setAuthors, books, setBooks, borrows, setBorrows }}>
             {children}
         </StateContext.Provider>
     );

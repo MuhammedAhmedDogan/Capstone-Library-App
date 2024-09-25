@@ -80,7 +80,11 @@ export const fetchDataItem = async (setItemState, setIsLoading, page, id, naviga
     } else {
         try {
             const item = await getById(page, id);
-            setItemState(item);
+            const editedItem = {};
+            for (let key in item) {
+                editedItem[key] = item[key] === null ? "" : item[key];
+            }
+            setItemState(editedItem);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -92,9 +96,16 @@ export const fetchDataItem = async (setItemState, setIsLoading, page, id, naviga
 export const fetchDataList = async (setListState, setIsLoading, page, navigate) => {
     setIsLoading(true);
     try {
-        const ListData = await getList(page);
-        ListData.sort((a, b) => a.id - b.id);
-        setListState(ListData);
+        const listData = await getList(page);
+        const editedList = listData.map(item => {
+            const editedItem = {};
+            for (let key in item) {
+                editedItem[key] = item[key] === null ? "" : item[key];
+            }
+            return editedItem;
+        });
+        editedList.sort((a, b) => a.id - b.id);
+        setListState(editedList);
         setIsLoading(false);
     } catch (error) {
         console.log(error);

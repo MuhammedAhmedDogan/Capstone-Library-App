@@ -83,7 +83,7 @@ const StyledTag = styled(Tag)`
   background-color: #F0F0F0;
   border: 1px solid rgba(0, 0, 0, 0.87);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.87);
-  border-radius: 10px;
+  border-radius: 100px;
   box-sizing: content-box;
   padding: 0 4px 0 10px;
   outline: 0;

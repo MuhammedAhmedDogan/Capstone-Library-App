@@ -32,7 +32,8 @@
     .author-title-informations,
     .book-title-informations,
     .category-title-informations,
-    .publisher-title-informations {
+    .publisher-title-informations,
+    .borrow-title-informations {
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -49,7 +50,7 @@
         color: rgba(0, 0, 0, 0.87);
         margin: 0;
         padding: 0;
-        
+
         box-sizing: border-box;
     }
 
@@ -69,7 +70,8 @@
     .author-informations,
     .book-informations,
     .category-informations,
-    .publisher-informations {
+    .publisher-informations,
+    .borrow-informations {
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -88,7 +90,8 @@
     .author-informations:hover,
     .book-informations:hover,
     .category-informations:hover,
-    .publisher-informations:hover {
+    .publisher-informations:hover,
+    .borrow-informations:hover {
         border: 1px solid #F37C22;
 
         h2 {
@@ -107,7 +110,7 @@
         background-color: #F0F0F0;
         margin: 0;
         padding: 7px;
-        
+
         height: 38px;
         box-sizing: border-box;
         white-space: nowrap;
@@ -134,5 +137,10 @@
 
 .list-titles .category-title-informations h2,
 .item-card .category-informations h2 {
+    width: calc(100% / 2);
+}
+
+.list-titles .borrow-title-informations h2,
+.item-card .borrow-informations h2 {
     width: calc(100% / 2);
 }
