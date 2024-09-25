@@ -1,8 +1,6 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/material/styles';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
 
@@ -59,60 +57,6 @@ const InputWrapper = styled('div')`
   }
 `;
 
-function Tag(props) {
-  const { label, onDelete, ...other } = props;
-  return (
-    <div {...other}>
-      <span>{label}</span>
-      <CloseIcon onClick={onDelete} />
-    </div>
-  );
-}
-
-Tag.propTypes = {
-  label: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
-
-const StyledTag = styled(Tag)`
-  display: flex;
-  align-items: center;
-  height: 34px;
-  margin: 2px;
-  line-height: 22px;
-  background-color: #F0F0F0;
-  border: 1px solid rgba(0, 0, 0, 0.87);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.87);
-  border-radius: 10px;
-  box-sizing: content-box;
-  padding: 0 4px 0 10px;
-  outline: 0;
-  overflow: hidden;
-
-  &:focus {
-    border-color: #F37C22;
-    box-shadow: 0 0 2px #F37C22;
-  }
-
-  & span {
-    font-weight: 500;
-    font-size: 13px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  & svg {
-    font-size: 13px;
-    cursor: pointer;
-    padding: 4px;
-    transition: all 0.3s ease;
-  }
-  & svg:hover {
-    color: #FF2400;
-  }
-`;
-
 const Listbox = styled('ul')`
   width: 100%;
   margin: 2px 0 0;
@@ -160,30 +104,28 @@ const Listbox = styled('ul')`
   }
 `;
 
-export default function CategorySelector({ categories, book, setBook }) {
+export default function ItemSelector({ itemKey, items, item, setItem }) {
+  const newItems = [...items, { id: 0, name: '' }];
   const {
     getRootProps,
     getInputLabelProps,
     getInputProps,
-    getTagProps,
     getListboxProps,
     getOptionProps,
     groupedOptions,
-    value,
     focused,
     setAnchorEl,
   } = useAutocomplete({
-    id: 'category-selector',
-    defaultValue: [],
-    value: book.categories,
-    multiple: true,
-    options: categories,
+    id: `${itemKey.toLowerCase()}-selector`,
+    multiple: false,
+    options: newItems,
+    value: item[itemKey.toLowerCase()],
     getOptionLabel: (option) => option.name,
     isOptionEqualToValue: (option, value) => option.id === value.id,
     onChange: (event, newValue) => {
-      setBook(prevState => ({
+      setItem(prevState => ({
         ...prevState,
-        categories: newValue
+        [itemKey.toLowerCase()]: newValue
       }));
     },
   });
@@ -193,17 +135,16 @@ export default function CategorySelector({ categories, book, setBook }) {
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}></Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-          {value.map((option, index) => {
-            const { key, ...tagProps } = getTagProps({ index });
-            return <StyledTag key={key} {...tagProps} label={option.name} />;
-          })}
-          <input placeholder={value.length === 0 ? 'Select Categories' : ''} {...getInputProps()} />
+          <input placeholder={`Select ${itemKey}`} {...getInputProps()} />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
           {groupedOptions.map((option, index) => {
             const { key, ...optionProps } = getOptionProps({ option, index });
+            if (option.id === 0) {
+              return null;
+            }
             return (
               <li key={key} {...optionProps}>
                 <span>{option.name}</span>

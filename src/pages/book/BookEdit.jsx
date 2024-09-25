@@ -3,12 +3,13 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { StateContext } from './../../context/StateContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
-import { handleTurnBack, handleInput, handleSelect, handleSave, fetchDataItem, fetchDataList } from './../../utils/helpers';
+import { handleTurnBack, handleInput, handleSave, fetchDataItem, fetchDataList } from './../../utils/helpers';
 import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
 import './../../css/editPageStyles.css';
 import CategorySelector from '../../components/CategorySelector';
+import ItemSelector from '../../components/ItemSelector';
 
 const BookEdit = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const BookEdit = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [messageData, setMessageData] = useState({ message: '', color: 'black' });
-  const [book, setBook] = useState({ id: 0, name: '', publicationYear: '', stock: '', author: { id: 0 }, publisher: { id: 0 }, categories: [] });
+  const [book, setBook] = useState({ id: 0, name: '', publicationYear: '', stock: '', author: { id: 0, name: '' }, publisher: { id: 0, name: '' }, categories: [] });
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -53,7 +54,7 @@ const BookEdit = () => {
       }, 2000);
       return;
     }
-    if (book.author.id === 0) {
+    if (!book.author || book.author.id === 0) {
       setMessageData({ message: 'Author cannot be empty!', color: '#FF2400' });
       setShowMessage(true);
       setTimeout(() => {
@@ -61,7 +62,7 @@ const BookEdit = () => {
       }, 2000);
       return;
     }
-    if (book.publisher.id === 0) {
+    if (!book.publisher || book.publisher.id === 0) {
       setMessageData({ message: 'Publisher cannot be empty!', color: '#FF2400' });
       setShowMessage(true);
       setTimeout(() => {
@@ -112,29 +113,15 @@ const BookEdit = () => {
 
         <div className='input-row'>
           <h2>Author:</h2>
-          <div className='input-area'>
-            <select id="book-author" value={book.author.id} onChange={(e) => handleSelect(e, setBook, authors)} style={book.author.id === 0 ? { color: 'rgba(0, 0, 0, 0.6)' } : {}}>
-              <option value='0' disabled>Select an Author</option>
-              {authors.map(item => (
-                <option key={item.id} value={item.id} style={{ color: 'rgba(0, 0, 0, 1)' }}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+          <div className='author-input-area'>
+            <ItemSelector itemKey='Author' items={authors} item={book} setItem={setBook} />
           </div>
         </div>
 
         <div className='input-row'>
           <h2>Publisher:</h2>
-          <div className='input-area'>
-            <select id="book-publisher" value={book.publisher.id} onChange={(e) => handleSelect(e, setBook, publishers)} style={book.publisher.id === 0 ? { color: 'rgba(0, 0, 0, 0.6)' } : {}}>
-              <option value='0' disabled>Select a Publisher</option>
-              {publishers.map(item => (
-                <option key={item.id} value={item.id} style={{ color: 'rgba(0, 0, 0, 1)' }}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+          <div className='publisher-input-area'>
+            <ItemSelector itemKey='Publisher' items={publishers} item={book} setItem={setBook} />
           </div>
         </div>
 

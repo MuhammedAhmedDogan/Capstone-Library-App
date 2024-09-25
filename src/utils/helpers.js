@@ -18,17 +18,6 @@ export const handleInput = (e, setItemState) => {
     }));
 };
 
-export const handleSelect = (e, setItemState, objList) => {
-    const { id, value } = e.target;
-    const key = id.split('-')[1];
-    const selectedObjId = parseInt(value);
-    const selectedObj = objList.find(item => item.id === selectedObjId);
-    setItemState(prevState => ({
-        ...prevState,
-        [key]: selectedObj
-    }));
-};
-
 export const handleSave = async (itemName, item, setIsLoading, page, id, navigate, setShowMessage, setMessageData) => {
     try {
         setIsLoading(true);
