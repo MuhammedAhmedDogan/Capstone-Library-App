@@ -3,7 +3,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { StateContext } from './../../context/StateContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
-import { handleTurnBack, handleInput, handleSave, fetchDataItem, fetchDataList } from './../../utils/helpers';
+import { handleTurnBack, handleInput, handleSave, fetchDataItem, fetchDataList, bookStockAdjustment } from './../../utils/helpers';
 import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
@@ -17,6 +17,7 @@ const BorrowEdit = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAllLoading, setIsAllLoading] = useState(true);
   const [isNewListLoading, setIsNewListLoading] = useState(true);
+  const [isReturnDateExist, setIsReturnDateExist] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [messageData, setMessageData] = useState({ message: '', color: 'black' });
@@ -40,6 +41,9 @@ const BorrowEdit = () => {
     if (!isAllLoading) {
       setIsNewListLoading(true);
       setNewBooks([...books, { id: 0, name: '', stock: 0 }]);
+      if (borrow.id !== 0 && borrow.returnDate && borrow.returnDate !== '') {
+        setIsReturnDateExist(true);
+      }
       setIsNewListLoading(false);
     }
   }, [isAllLoading])
@@ -79,6 +83,11 @@ const BorrowEdit = () => {
         setShowMessage(false);
       }, 2000);
       return;
+    }
+
+    if (borrow.id !== 0 && isReturnDateExist && borrow.returnDate === '') {
+      const updatedBook = { ...borrow.book, stock: borrow.book.stock - 1 }
+      bookStockAdjustment(updatedBook, updatedBook.id, setIsAllLoading)
     }
 
     handleSave('Borrowing Record', borrow, setIsLoading, page, id, navigate, setShowMessage, setMessageData);

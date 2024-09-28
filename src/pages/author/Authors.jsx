@@ -40,14 +40,14 @@ const Authors = () => {
           </div>}
           <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Author</button>
         </div>
-        {authors.map(item => (
+        {authors.map((item, index) => (
           <div key={item.id} className='item-card'>
             <div className='author-informations'>
-              <h2>{item.name}</h2>
-              <h2>{item.birthDate}</h2>
-              <h2>{item.country}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.name}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.birthDate}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.country}</h2>
             </div>
-            <button className='view-btn' onClick={() => goToEditPage(item.id, page, navigate)}>View / Edit</button>
+            <button style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}} className='view-btn' onClick={() => goToEditPage(item.id, page, navigate)}>View / Edit</button>
           </div>
         ))}
       </div>}

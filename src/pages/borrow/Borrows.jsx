@@ -44,16 +44,16 @@ const Borrows = () => {
           </div>}
           <button className='add-btn' onClick={() => goToEditPage(0, page, navigate)}>Add New Record</button>
         </div>
-        {borrows.map(item => (
+        {borrows.map((item, index) => (
           <div key={item.id} className='item-card'>
             <div className='borrow-informations'>
-              <h2>{item.borrowerName}</h2>
-              <h2>{item.borrowerMail}</h2>
-              <h2>{item.book.name}</h2>
-              <h2>{item.borrowingDate}</h2>
-              <h2>{item.returnDate}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.borrowerName}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.borrowerMail}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.book.name}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.borrowingDate}</h2>
+              <h2 style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}}>{item.returnDate}</h2>
             </div>
-            <button className='view-btn' onClick={() => goToEditPage(item.id, page, navigate)}>View / Edit</button>
+            <button style={index % 2 === 0 ? { backgroundColor: '#E5E4E2' } : {}} className='view-btn' onClick={() => goToEditPage(item.id, page, navigate)}>View / Edit</button>
           </div>
         ))}
       </div>}

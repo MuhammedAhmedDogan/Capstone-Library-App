@@ -46,6 +46,16 @@ export const handleSave = async (itemName, item, setIsLoading, page, id, navigat
     }
 };
 
+export const bookStockAdjustment = async (item, id, setIsLoading) => {
+    try {
+        setIsLoading(true);
+        await updateData('books', id, item);
+        setIsLoading(false);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const handleDelete = async (itemName, item, setIsLoading, page, id, navigate, setShowMessage, setMessageData) => {
     try {
         setIsLoading(true);
