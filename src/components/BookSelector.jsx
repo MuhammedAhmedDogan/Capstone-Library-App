@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import CheckIcon from '@mui/icons-material/Check';
+import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import { styled } from '@mui/material/styles';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
+
 
 const Root = styled('div')`
   color: rgba(0,0,0,1);
@@ -104,7 +107,7 @@ const Listbox = styled('ul')`
   }
 `;
 
-export default function ItemSelector({ itemKey, items, item, setItem }) {
+export default function BookSelector({ newBooks, borrow, setBorrow }) {
   const {
     getRootProps,
     getInputLabelProps,
@@ -115,16 +118,25 @@ export default function ItemSelector({ itemKey, items, item, setItem }) {
     focused,
     setAnchorEl,
   } = useAutocomplete({
-    id: `${itemKey.toLowerCase()}-selector`,
+    id: 'book-selector',
     multiple: false,
-    options: items,
-    value: item[itemKey.toLowerCase()],
+    options: newBooks,
+    value: borrow.book,
     getOptionLabel: (option) => option.name,
     isOptionEqualToValue: (option, value) => option.id === value.id,
     onChange: (event, newValue) => {
-      setItem(prevState => ({
+      if (newValue && newValue.stock === 0) {
+        setBorrow(prevState => ({
+          ...prevState,
+          book: { id: 0, name: '', stock: 0 },
+          bookForBorrowingRequest: { id: 0, name: '', stock: 0 }
+        }));
+        return;
+      }
+      setBorrow(prevState => ({
         ...prevState,
-        [itemKey.toLowerCase()]: newValue
+        book: newValue,
+        bookForBorrowingRequest: newValue
       }));
     },
   });
@@ -134,7 +146,7 @@ export default function ItemSelector({ itemKey, items, item, setItem }) {
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}></Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-          <input placeholder={`Select ${itemKey}`} {...getInputProps()} />
+          <input placeholder={'Select Book'} {...getInputProps()} />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (
@@ -144,9 +156,20 @@ export default function ItemSelector({ itemKey, items, item, setItem }) {
             if (option.id === 0) {
               return null;
             }
+            if (option.stock === 0) {
+              return (
+                <li key={key}
+                  {...optionProps}
+                  onClick={(e) => option.stock === 0 && e.preventDefault()}
+                  style={{ cursor: 'not-allowed' }} >
+                  <span style={{ color: '#FF2400' }}>{option.name} - Out of stock</span>
+                  <NotInterestedIcon fontSize="small" />
+                </li>
+              );
+            }
             return (
               <li key={key} {...optionProps}>
-                <span>{option.name}</span>
+                <span>{option.name} - Stock: {option.stock}</span>
                 <CheckIcon fontSize="small" />
               </li>
             );

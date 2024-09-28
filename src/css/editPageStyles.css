@@ -79,6 +79,10 @@
             }
 
             ;
+
+            input:disabled {
+                background-color: rgba(0, 0, 0, 0.1)
+            }
         }
 
         ;
@@ -86,7 +90,8 @@
 
     .category-input-area,
     .author-input-area,
-    .publisher-input-area {
+    .publisher-input-area,
+    .book-input-area {
         width: 80%;
         display: flex;
         justify-content: start;

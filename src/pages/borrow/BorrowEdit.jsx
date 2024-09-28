@@ -7,8 +7,8 @@ import { handleTurnBack, handleInput, handleSave, fetchDataItem, fetchDataList }
 import Navbar from './../../components/Navbar';
 import DeleteConfirmation from './../../components/DeleteConfirmation';
 import ToastMessage from './../../components/ToastMessage';
+import BookSelector from '../../components/BookSelector';
 import './../../css/editPageStyles.css';
-import ItemSelector from '../../components/ItemSelector';
 
 const BorrowEdit = () => {
   const navigate = useNavigate();
@@ -16,10 +16,12 @@ const BorrowEdit = () => {
   const { books, setBooks } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isAllLoading, setIsAllLoading] = useState(true);
+  const [isNewListLoading, setIsNewListLoading] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [messageData, setMessageData] = useState({ message: '', color: 'black' });
-  const [borrow, setBorrow] = useState({ id: 0, borrowerName: '', borrowerMail: '', borrowingDate: '', returnDate: '', book: { id: 0, name: '', stock: 0 } });
+  const [newBooks, setNewBooks] = useState([]);
+  const [borrow, setBorrow] = useState({ id: 0, borrowerName: '', borrowerMail: '', borrowingDate: '', returnDate: '', book: { id: 0, name: '', stock: 0 }, bookForBorrowingRequest: { id: 0, name: '', stock: 0 } });
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -29,12 +31,21 @@ const BorrowEdit = () => {
         fetchDataList(setBooks, setIsLoading, 'books', navigate),
       ]);
       setIsAllLoading(false);
+
     }
     fetchAll();
   }, [page, id]);
 
+  useEffect(() => {
+    if (!isAllLoading) {
+      setIsNewListLoading(true);
+      setNewBooks([...books, { id: 0, name: '', stock: 0 }]);
+      setIsNewListLoading(false);
+    }
+  }, [isAllLoading])
+
   const handleSaveBtn = () => {
-    if (borrow.borrowerName.trim() === '') {
+    if (!borrow.borrowerName || borrow.borrowerName.trim() === '') {
       setMessageData({ message: 'Borrower name cannot be empty!', color: '#FF2400' });
       setShowMessage(true);
       setTimeout(() => {
@@ -42,16 +53,9 @@ const BorrowEdit = () => {
       }, 2000);
       return;
     }
-    if (borrow.borrowingDate === '') {
-      setMessageData({ message: 'Borrowing date cannot be empty!', color: '#FF2400' });
-      setShowMessage(true);
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 2000);
-      return;
-    }
-    if (borrow.id !== 0 && borrow.returnDate === '') {
-      setMessageData({ message: 'Return date cannot be empty!', color: '#FF2400' });
+
+    if (borrow.id === 0 && (!borrow.book || borrow.book.id === 0)) {
+      setMessageData({ message: 'Book cannot be empty!', color: '#FF2400' });
       setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false);
@@ -59,7 +63,16 @@ const BorrowEdit = () => {
       return;
     }
 
-    if (borrow.returnDate < borrow.borrowingDate) {
+    if (!borrow.borrowingDate || borrow.borrowingDate === '') {
+      setMessageData({ message: 'Borrowing date cannot be empty!', color: '#FF2400' });
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+      return;
+    }
+
+    if (borrow.id !== 0 && borrow.returnDate && borrow.returnDate < borrow.borrowingDate) {
       setMessageData({ message: 'The return date must be later than the borrowing date!', color: '#FF2400' });
       setShowMessage(true);
       setTimeout(() => {
@@ -77,7 +90,7 @@ const BorrowEdit = () => {
       <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
       {showMessage && <ToastMessage messageData={messageData} />}
       {showConfirm && <DeleteConfirmation itemName='Borrowing Record' item={borrow} setIsLoading={setIsLoading} page={page} id={id} navigate={navigate} setShowConfirm={setShowConfirm} setShowMessage={setShowMessage} setMessageData={setMessageData} />}
-      {isLoading && isAllLoading ? <h1 className='loading-screen'>Borrowing Record Loading...</h1> : <div className='item'>
+      {isLoading && isAllLoading && isNewListLoading ? <h1 className='loading-screen'>Borrowing Record Loading...</h1> : <div className='item'>
         <h1 className='page-title'>Borrowing Record</h1>
 
         <div className='input-row'>
@@ -91,18 +104,31 @@ const BorrowEdit = () => {
           </div>
         </div>
 
-        {borrow.id === 0 && <div className='input-row'>
+        <div className='input-row'>
           <h2>Borrower Mail:</h2>
           <div className='input-area'>
             <input id='borrow-borrowerMail'
               placeholder='Borrower Mail'
               type="email" value={borrow.borrowerMail}
               autoComplete='off'
-              onChange={(e) => { handleInput(e, setBorrow) }} />
+              onChange={(e) => { handleInput(e, setBorrow) }}
+              disabled={borrow.id !== 0 ? true : false} />
           </div>
-        </div>}
+        </div>
 
-
+        <div className='input-row'>
+          <h2>Book:</h2>
+          {borrow.id !== 0 ? <div className='input-area'>
+            <input id='borrow-book'
+              placeholder='Select Book'
+              type="text" value={borrow.book.name}
+              autoComplete='off'
+              disabled={true} />
+          </div> :
+            <div className='book-input-area'>
+              <BookSelector newBooks={newBooks} borrow={borrow} setBorrow={setBorrow} />
+            </div>}
+        </div>
 
         <div className='input-row'>
           <h2>Borrowing Date:</h2>

@@ -17,9 +17,12 @@ const BookEdit = () => {
   const { authors, setAuthors, publishers, setPublishers, categories, setCategories } = useContext(StateContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isAllLoading, setIsAllLoading] = useState(true);
+  const [isNewListLoading, setIsNewListLoading] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [messageData, setMessageData] = useState({ message: '', color: 'black' });
+  const [newAuthors, setNewAuthors] = useState([]);
+  const [newPublishers, setNewPublishers] = useState([]);
   const [book, setBook] = useState({ id: 0, name: '', publicationYear: '', stock: '', author: { id: 0, name: '' }, publisher: { id: 0, name: '' }, categories: [] });
 
   useEffect(() => {
@@ -35,6 +38,15 @@ const BookEdit = () => {
     }
     fetchAll();
   }, [page, id]);
+
+  useEffect(() => {
+    if (!isAllLoading) {
+      setIsNewListLoading(true);
+      setNewAuthors([...authors, { id: 0, name: '' }]);
+      setNewPublishers([...publishers, { id: 0, name: '' }]);
+      setIsNewListLoading(false);
+    }
+  }, [isAllLoading])
 
   useEffect(() => {
     setBook((prevItem) => {
@@ -86,7 +98,7 @@ const BookEdit = () => {
       <button onClick={() => handleTurnBack(navigate, page)} className='turn-back-btn'><FontAwesomeIcon icon={faAngleLeft} /></button>
       {showMessage && <ToastMessage messageData={messageData} />}
       {showConfirm && <DeleteConfirmation itemName='Book' item={book} setIsLoading={setIsLoading} page={page} id={id} navigate={navigate} setShowConfirm={setShowConfirm} setShowMessage={setShowMessage} setMessageData={setMessageData} />}
-      {isLoading && isAllLoading ? <h1 className='loading-screen'>Book Loading...</h1> : <div className='item'>
+      {isLoading && isAllLoading && isNewListLoading ? <h1 className='loading-screen'>Book Loading...</h1> : <div className='item'>
         <h1 className='page-title'>Book</h1>
 
         <div className='input-row'>
@@ -114,14 +126,14 @@ const BookEdit = () => {
         <div className='input-row'>
           <h2>Author:</h2>
           <div className='author-input-area'>
-            <ItemSelector itemKey='Author' items={authors} item={book} setItem={setBook} />
+            <ItemSelector itemKey='Author' items={newAuthors} item={book} setItem={setBook} />
           </div>
         </div>
 
         <div className='input-row'>
           <h2>Publisher:</h2>
           <div className='publisher-input-area'>
-            <ItemSelector itemKey='Publisher' items={publishers} item={book} setItem={setBook} />
+            <ItemSelector itemKey='Publisher' items={newPublishers} item={book} setItem={setBook} />
           </div>
         </div>
 
