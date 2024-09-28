@@ -83,6 +83,7 @@ const PublisherEdit = () => {
                     <div className='input-area'>
                         <textarea id='publisher-address'
                             placeholder='Publisher Address'
+                            maxLength='250'
                             type="text" value={publisher.address}
                             autoComplete='off'
                             onChange={(e) => { handleInput(e, setPublisher) }} />

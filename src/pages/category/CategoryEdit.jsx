@@ -58,6 +58,7 @@ const CategoryEdit = () => {
           <div className='input-area'>
             <textarea id='category-description'
               placeholder='Category Description'
+              maxLength='250'
               type="text" value={category.description}
               autoComplete='off'
               onChange={(e) => { handleInput(e, setCategory) }} />
