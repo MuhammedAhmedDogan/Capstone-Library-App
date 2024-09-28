@@ -29,8 +29,7 @@ The Library Management System is a full-stack application designed to streamline
 
 ## Live Demo
 
-👉 You can access the live version of the project [here](https://ahmeddogan-capstone-library-app.netlify.app/) 👈 <br>
-<br>
+👉 You can access the live version of the project [here](https://ahmeddogan-capstone-library-app.netlify.app/) 👈
 
 ![Project Screenshot](https://raw.githubusercontent.com/MuhammedAhmedDogan/Capstone-Library-App/refs/heads/main/src/assets/home-page-screenshot.png?token=GHSAT0AAAAAACVGVUFHDQ3NJQZ2CXZRAPDOZXYGXJQ)
 
